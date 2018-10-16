@@ -31,6 +31,8 @@ class TimeInput: InputField {
             updateText()
         }
     }
+    
+    var inputCompletion: ((_ value: TimeValueParts) -> Void)?
 
     // MARK: - Private
     
@@ -75,8 +77,8 @@ class TimeInput: InputField {
     
     private func setup() {
         self.inputView = timePicker
-        self.tintColor = .clear
-        timePicker.backgroundColor = UIColor(red: 32.0/255.0, green: 32.0/255.0, blue: 32.0/255.0, alpha: 1.0)
+        self.textColor = .clear
+        timePicker.backgroundColor = InputView.keyboardBackgroundColor
         
         let pickerHeight = timePicker.bounds.height
         let leftMargin = componentWidth / 2.0 - 10
@@ -119,15 +121,9 @@ class TimeInput: InputField {
     }
     
     private func updateText() {
-        let text: String = "\(value.hours == 0 ? "" : "\(value.hours)H")  \(value.minutes == 0 && value.hours == 0 ? "" : "\(value.minutes)M")  \(value.seconds == 0 && value.minutes == 0 && value.hours == 0 ? "" : "\(value.seconds)S")  \(value.ms == 0 ? "" : "\(value.ms)MS")"
-        
-        let attributeString = NSMutableAttributedString(string: text)
-        let specificChar: [String] = ["H", "M", "S", "MS"]
-        for char in specificChar {
-            let range = (text as NSString).range(of: char, options: .caseInsensitive)
-            attributeString.addAttribute(NSAttributedString.Key.font, value: UIFont.systemFont(ofSize: 11, weight: .regular), range: range)
+        if let completion = inputCompletion {
+            completion(value)
         }
-        self.attributedText = attributeString
     }
     
 }
@@ -161,7 +157,7 @@ extension TimeInput: UIPickerViewDelegate, UIPickerViewDataSource {
             return label
         }
         label.text = "\(datasourceFor(timeType)[row])"
-        label.font = UIFont.systemFont(ofSize: 16.0, weight: .bold)
+        label.font = InputView.pickerFont
         label.textColor = . white
         return label
     }

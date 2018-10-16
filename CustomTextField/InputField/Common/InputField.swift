@@ -25,10 +25,10 @@ class InputField: UITextField {
     // MARK: - SETUP VIEW
     
     private func setupView() {
-        placeholder = "Say something..."
-        tintColor = .orange
+        tintColor = .clear
         textColor = .white
-//        font = UIFont.systemFont(ofSize: 20.0, weight: .medium)
+        textAlignment = .center
+        font = InputView.mediumFont
         
 //        let button = UIButton(frame: self.bounds)
 //        button.setTitle("", for: .normal)
