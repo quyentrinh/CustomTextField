@@ -12,14 +12,26 @@ import UIKit
 
 class InputView: UIView {
     
+    @IBInspectable open var numberInput: Bool = true
+    
+    // MARK: - Constant
     static let backgroundColor: UIColor = .clear
     static let keyboardBackgroundColor: UIColor = UIColor(red: 32.0/255.0, green: 32.0/255.0, blue: 32.0/255.0, alpha: 1.0)
     static let mediumFont: UIFont = .systemFont(ofSize: 20, weight: .medium)
     static let smallFont: UIFont = .systemFont(ofSize: 11, weight: .regular)
     static let pickerFont: UIFont = .systemFont(ofSize: 16, weight: .bold)
-    
-    @IBInspectable open var numberInput: Bool = true
 
+    // MARK: - Public
+    
+    var enable: Bool = true {
+        didSet {
+            self.isUserInteractionEnabled = enable
+            self.alpha = enable ? 1.0 : 0.5
+        }
+    }
+    
+    
+    // MARK: - Private
     private var inputField: InputField!
     private var bottomLine: UIView!
     private var textLabel: UILabel?
@@ -101,10 +113,14 @@ class InputView: UIView {
 
 extension InputView: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        bottomLine.backgroundColor = .red
+        UIView.animate(withDuration: 0.2, animations: {
+            self.bottomLine.backgroundColor = .red
+        }, completion:nil)
     }
     
     func textFieldDidEndEditing(_ textField: UITextField, reason: UITextField.DidEndEditingReason) {
-        bottomLine.backgroundColor = .lightGray
+        UIView.animate(withDuration: 0.2, animations: {
+            self.bottomLine.backgroundColor = .lightGray
+        }, completion:nil)
     }
 }

@@ -28,7 +28,7 @@
                                 </userDefinedRuntimeAttributes>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6RW-n9-Ydy" customClass="InputView" customModule="CustomTextField" customModuleProvider="target">
-                                <rect key="frame" x="33" y="91" width="295" height="41"/>
+                                <rect key="frame" x="33" y="91" width="295" height="49"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="boolean" keyPath="numberInput" value="YES"/>
@@ -52,6 +52,10 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <connections>
+                        <outlet property="txtNumber" destination="6RW-n9-Ydy" id="BBR-qd-KNg"/>
+                        <outlet property="txtTime" destination="Kur-0m-rQh" id="Dai-xA-81Y"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
